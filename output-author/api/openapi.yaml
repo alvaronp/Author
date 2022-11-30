@@ -1,0 +1,483 @@
+openapi: 3.0.3
+info:
+  title: Bookify's Author - OpenAPI 3.0
+  description: This is the API implementation for Bookify's author actions
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/alvaronp/Author/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: author
+  description: Actions to Bookify's authors
+paths:
+  /author:
+    post:
+      tags:
+      - author
+      summary: Create author
+      description: Creates an author account to enter to Bookify app and publish books.
+      operationId: createAuthor
+      requestBody:
+        description: Created author object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Author'
+      x-swagger-router-controller: Author
+  /author/{authorname}:
+    get:
+      tags:
+      - author
+      summary: Get author info
+      description: Returns an author
+      operationId: getAuthor
+      parameters:
+      - name: authorname
+        in: path
+        description: The author name to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Author'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Author
+    put:
+      tags:
+      - author
+      summary: Update author
+      description: This can only be done by the logged in author.
+      operationId: updateUser
+      parameters:
+      - name: authorname
+        in: path
+        description: author's username that need to be update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Update an existent author in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Author'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Author
+    delete:
+      tags:
+      - author
+      summary: Delete author
+      description: This can only be done by the logged in author.
+      operationId: deleteAuthor
+      parameters:
+      - name: authorname
+        in: path
+        description: The name that needs to be deleted
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Invalid authorname supplied
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Author
+  /author/login:
+    get:
+      tags:
+      - author
+      summary: Logs author into Bookify app
+      description: ""
+      operationId: loginAuthor
+      parameters:
+      - name: authorname
+        in: query
+        description: The author name for login
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the author
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/xml:
+              schema:
+                type: string
+                x-content-type: application/xml
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid authorname/password supplied
+      x-swagger-router-controller: Author
+  /author/logout:
+    get:
+      tags:
+      - author
+      summary: Logs out current logged in author session
+      description: ""
+      operationId: logoutAuthor
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: Author
+  /author/{bookId}/statistics:
+    get:
+      tags:
+      - author
+      summary: Get the statistics for an author's book
+      description: ""
+      operationId: getBookStatistics
+      parameters:
+      - name: bookId
+        in: path
+        description: Id of the book
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Book not found
+      x-swagger-router-controller: Author
+components:
+  schemas:
+    Genre:
+      type: string
+      description: Book genres enum
+      enum:
+      - Fantasy
+      - Sci-Fi
+      - Horror
+      - Adventure
+      - Mistery
+      - Romance
+      - History
+      - Drama
+      - Thriller
+      - Comedy
+      - Poetry
+    Book:
+      required:
+      - author
+      - bookId
+      - genre
+      - name
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Fire & Blood
+        author:
+          type: string
+          example: George R.R. Martin
+        genre:
+          $ref: '#/components/schemas/Genre'
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book_ratings'
+        audiobook:
+          $ref: '#/components/schemas/Audiobook'
+        coverUrl:
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg
+        status:
+          type: string
+          description: book status in the app
+          enum:
+          - available
+          - updating
+          - unavailable
+      example:
+        coverUrl: https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg
+        audiobook:
+          duration: 247
+          narrator: John Doe
+          link: https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3
+          status: available
+        author: George R.R. Martin
+        ratings:
+        - rating:
+            rate: 4.7
+            comment: I loved it!
+            username: John
+        - rating:
+            rate: 4.7
+            comment: I loved it!
+            username: John
+        name: Fire & Blood
+        genre: Fantasy
+        bookId: 1
+        status: available
+      xml:
+        name: book
+    Audiobook:
+      required:
+      - status
+      type: object
+      properties:
+        link:
+          type: string
+          example: https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3
+        narrator:
+          type: string
+          example: John Doe
+        duration:
+          type: integer
+          example: 247
+        status:
+          type: string
+          description: audiobook status in the app
+          enum:
+          - available
+          - unavailable
+      example:
+        duration: 247
+        narrator: John Doe
+        link: https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3
+        status: available
+      xml:
+        name: audiobook
+    Rating:
+      type: object
+      properties:
+        username:
+          type: string
+          example: John
+        comment:
+          type: string
+          example: I loved it!
+        rate:
+          maximum: 5
+          minimum: 1
+          type: number
+          example: 4.7
+      example:
+        rate: 4.7
+        comment: I loved it!
+        username: John
+      xml:
+        name: rating
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        authorname:
+          type: string
+          example: grrmart
+        name:
+          type: string
+          example: George R.R. Martin
+        email:
+          type: string
+          example: georgerrmartin@email.com
+        password:
+          type: string
+          example: "12345678"
+        bankAccount:
+          type: string
+          example: XXXX-XXX-1234
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+        statistics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Statistics'
+      example:
+        bankAccount: XXXX-XXX-1234
+        password: "12345678"
+        books:
+        - coverUrl: https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg
+          audiobook:
+            duration: 247
+            narrator: John Doe
+            link: https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3
+            status: available
+          author: George R.R. Martin
+          ratings:
+          - rating:
+              rate: 4.7
+              comment: I loved it!
+              username: John
+          - rating:
+              rate: 4.7
+              comment: I loved it!
+              username: John
+          name: Fire & Blood
+          genre: Fantasy
+          bookId: 1
+          status: available
+        - coverUrl: https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg
+          audiobook:
+            duration: 247
+            narrator: John Doe
+            link: https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3
+            status: available
+          author: George R.R. Martin
+          ratings:
+          - rating:
+              rate: 4.7
+              comment: I loved it!
+              username: John
+          - rating:
+              rate: 4.7
+              comment: I loved it!
+              username: John
+          name: Fire & Blood
+          genre: Fantasy
+          bookId: 1
+          status: available
+        authorname: grrmart
+        name: George R.R. Martin
+        id: 1
+        email: georgerrmartin@email.com
+        statistics:
+        - unfinishedreads: 450
+          nreads: 2456
+          lastmonthrating: 4.7
+          bookId: 1
+          avgrating: 4.6
+        - unfinishedreads: 450
+          nreads: 2456
+          lastmonthrating: 4.7
+          bookId: 1
+          avgrating: 4.6
+      xml:
+        name: author
+    Statistics:
+      type: object
+      properties:
+        bookId:
+          type: integer
+          format: int64
+          example: 1
+        nreads:
+          type: integer
+          example: 2456
+        avgrating:
+          type: number
+          example: 4.6
+        lastmonthrating:
+          type: number
+          example: 4.7
+        unfinishedreads:
+          type: integer
+          example: 450
+      example:
+        unfinishedreads: 450
+        nreads: 2456
+        lastmonthrating: 4.7
+        bookId: 1
+        avgrating: 4.6
+      xml:
+        name: statistic
+    Book_ratings:
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/Rating'
+      example:
+        rating:
+          rate: 4.7
+          comment: I loved it!
+          username: John
+  requestBodies:
+    author:
+      description: author object that identifies in the app
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Author'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Author'
