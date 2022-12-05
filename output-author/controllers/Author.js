@@ -13,8 +13,9 @@ module.exports.createAuthor = function createAuthor (req, res, next, body) {
     });
 };
 
-module.exports.createAuthor = function createAuthor (req, res, next, body) {
-  Author.createAuthor(body)
+
+module.exports.deleteAuthor = function deleteAuthor (req, res, next, authorId) {
+  Author.deleteAuthor(authorId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -23,8 +24,8 @@ module.exports.createAuthor = function createAuthor (req, res, next, body) {
     });
 };
 
-module.exports.deleteAuthor = function deleteAuthor (req, res, next, authorname) {
-  Author.deleteAuthor(authorname)
+module.exports.getAuthor = function getAuthor (req, res, next, authorId) {
+  Author.getAuthor(authorId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,18 +34,8 @@ module.exports.deleteAuthor = function deleteAuthor (req, res, next, authorname)
     });
 };
 
-module.exports.getAuthor = function getAuthor (req, res, next, authorname) {
-  Author.getAuthor(authorname)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.getBookStatistics = function getBookStatistics (req, res, next, bookId) {
-  Author.getBookStatistics(bookId)
+module.exports.getBookStatistics = function getBookStatistics (req, res, next, authorId) {
+  Author.getBookStatistics(authorId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -73,8 +64,8 @@ module.exports.logoutAuthor = function logoutAuthor (req, res, next) {
     });
 };
 
-module.exports.updateUser = function updateUser (req, res, next, body, authorname) {
-  Author.updateUser(body, authorname)
+module.exports.updateAuthor = function updateAuthor (req, res, next, body) {
+  Author.updateAuthor(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -83,12 +74,3 @@ module.exports.updateUser = function updateUser (req, res, next, body, authornam
     });
 };
 
-module.exports.updateUser = function updateUser (req, res, next, body, authorname) {
-  Author.updateUser(body, authorname)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};

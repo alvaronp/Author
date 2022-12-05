@@ -10,179 +10,28 @@
  **/
 exports.createAuthor = function(body) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "bankAccount" : "XXXX-XXX-1234",
-  "password" : "12345678",
-  "books" : [ {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  }, {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  } ],
-  "authorname" : "grrmart",
-  "name" : "George R.R. Martin",
-  "id" : 1,
-  "email" : "georgerrmartin@email.com",
-  "statistics" : [ {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  }, {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  } ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
+    var examples = {
+    "bankAccount" : body.bankAccount,
+    "password" : body.password,
+    "books" : [],
+    "authorname" : body.authorname,
+    "name" : body.name,
+    "id" : body.id,
+    "email" : body.email,
+    "statistics" : []
+  };
 
-
-/**
- * Create author
- * Creates an author account to enter to Bookify app and publish books.
- *
- * body Author Created author object (optional)
- * returns Author
- **/
-exports.createAuthor = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "bankAccount" : "XXXX-XXX-1234",
-  "password" : "12345678",
-  "books" : [ {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  }, {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  } ],
-  "authorname" : "grrmart",
-  "name" : "George R.R. Martin",
-  "id" : 1,
-  "email" : "georgerrmartin@email.com",
-  "statistics" : [ {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  }, {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  } ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+  if (body.id > 3) {
+    if(body.password.length >= 8){
+      resolve(examples);
     }
+    else{
+      reject(JSON.stringify("La contraseña debe tener al menos 8 caracteres"));
+    }
+  } 
+  else {
+    reject(JSON.stringify("Ya existen autores con ese ID"));
+  }
   });
 }
 
@@ -191,12 +40,84 @@ exports.createAuthor = function(body) {
  * Delete author
  * This can only be done by the logged in author.
  *
- * authorname String The name that needs to be deleted
+ * authorId Integer The author's ID that needs to be deleted
  * no response value expected for this operation
  **/
-exports.deleteAuthor = function(authorname) {
+exports.deleteAuthor = function(authorId) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    var examples = [{
+      "bankAccount" : "XXXX-XXX-1234",
+      "password" : "12345678",
+      "books" : [ {
+        "bookId" : 1,
+      }, {
+        "bookId" : 2,
+      } ],
+      "authorname" : "grrmart",
+      "name" : "George R.R. Martin",
+      "id" : 1,
+      "email" : "georgerrmartin@email.com",
+      "statistics" : [ {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+      }, {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+    }]
+  },{
+      "bankAccount" : "XXXX-XXX-3214",
+      "password" : "12341209",
+      "books" : [ {
+        "bookId" : 1,
+      }, {
+        "bookId" : 2,
+      } ],
+      "authorname" : "arturopr",
+      "name" : "Arturo Pérez Reverte",
+      "id" : 2,
+      "email" : "arturopr@email.com",
+      "statistics" : [ {
+        "unfinishedreads" : 542,
+        "nreads" : 2451,
+        "lastmonthrating" : 4.3,
+        "bookId" : 1,
+        "avgrating" : 4.4
+      }, {
+        "unfinishedreads" : 324,
+        "nreads" : 1873,
+        "lastmonthrating" : 4.8,
+        "bookId" : 2,
+        "avgrating" : 4.6
+      }]
+  },{
+    "bankAccount" : "XXXX-XXX-8756",
+    "password" : "98765432",
+    "books" : [ {
+      "bookId" : 1,
+    }],
+    "authorname" : "jkrowling",
+    "name" : "J.K. Rowling",
+    "id" : 3,
+    "email" : "jkrowling@email.com",
+    "statistics" : [ {
+      "unfinishedreads" : 2314,
+      "nreads" : 6789,
+      "lastmonthrating" : 4.7,
+      "bookId" : 1,
+      "avgrating" : 4.6
+    }]
+  }];
+  if (authorId < 4) {
+    resolve([JSON.stringify("AUTOR "+ authorId +" ELIMINADO: \n"),examples[authorId-1]]);
+  } else {
+    reject(JSON.stringify("No existe autor con ID" + authorId));
+  }
   });
 }
 
@@ -208,87 +129,80 @@ exports.deleteAuthor = function(authorname) {
  * authorname Long The author name to return
  * returns Author
  **/
-exports.getAuthor = function(authorname) {
+exports.getAuthor = function(authorId) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "bankAccount" : "XXXX-XXX-1234",
-  "password" : "12345678",
-  "books" : [ {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  }, {
-    "coverUrl" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Fire_%26_Blood_%282018%29_hardcover.jpg/220px-Fire_%26_Blood_%282018%29_hardcover.jpg",
-    "audiobook" : {
-      "duration" : 247,
-      "narrator" : "John Doe",
-      "link" : "https://www.ivoox.com/fuego-sangre-1_md_32713232_1.mp3",
-      "status" : "available"
-    },
-    "author" : "George R.R. Martin",
-    "ratings" : [ {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    }, {
-      "rating" : {
-        "rate" : 4.7,
-        "comment" : "I loved it!",
-        "username" : "John"
-      }
-    } ],
-    "name" : "Fire & Blood",
-    "genre" : "Fantasy",
-    "bookId" : 1,
-    "status" : "available"
-  } ],
-  "authorname" : "grrmart",
-  "name" : "George R.R. Martin",
-  "id" : 1,
-  "email" : "georgerrmartin@email.com",
-  "statistics" : [ {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  }, {
-    "unfinishedreads" : 450,
-    "nreads" : 2456,
-    "lastmonthrating" : 4.7,
-    "bookId" : 1,
-    "avgrating" : 4.6
-  } ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    var examples = [{
+      "bankAccount" : "XXXX-XXX-1234",
+      "password" : "12345678",
+      "books" : [ {
+        "bookId" : 1,
+      }, {
+        "bookId" : 2,
+      } ],
+      "authorname" : "grrmart",
+      "name" : "George R.R. Martin",
+      "id" : 1,
+      "email" : "georgerrmartin@email.com",
+      "statistics" : [ {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+      }, {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+    }]
+  },{
+      "bankAccount" : "XXXX-XXX-3214",
+      "password" : "12341209",
+      "books" : [ {
+        "bookId" : 1,
+      }, {
+        "bookId" : 2,
+      } ],
+      "authorname" : "arturopr",
+      "name" : "Arturo Pérez Reverte",
+      "id" : 2,
+      "email" : "arturopr@email.com",
+      "statistics" : [ {
+        "unfinishedreads" : 542,
+        "nreads" : 2451,
+        "lastmonthrating" : 4.3,
+        "bookId" : 1,
+        "avgrating" : 4.4
+      }, {
+        "unfinishedreads" : 324,
+        "nreads" : 1873,
+        "lastmonthrating" : 4.8,
+        "bookId" : 2,
+        "avgrating" : 4.6
+      }]
+  },{
+    "bankAccount" : "XXXX-XXX-8756",
+    "password" : "98765432",
+    "books" : [ {
+      "bookId" : 1,
+    }],
+    "authorname" : "jkrowling",
+    "name" : "J.K. Rowling",
+    "id" : 3,
+    "email" : "jkrowling@email.com",
+    "statistics" : [ {
+      "unfinishedreads" : 2314,
+      "nreads" : 6789,
+      "lastmonthrating" : 4.7,
+      "bookId" : 1,
+      "avgrating" : 4.6
+    }]
+  }];
+    if (authorId < 4) {
+      resolve([JSON.stringify("AUTOR " + authorId + ":\n"), examples[authorId-1]]);
     } else {
-      resolve();
+      reject(JSON.stringify("No existe autor con ID "+ authorId));
     }
   });
 }
@@ -300,20 +214,49 @@ exports.getAuthor = function(authorname) {
  * bookId String Id of the book
  * returns Statistics
  **/
-exports.getBookStatistics = function(bookId) {
+exports.getBookStatistics = function(authorId) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "unfinishedreads" : 450,
-  "nreads" : 2456,
-  "lastmonthrating" : 4.7,
-  "bookId" : 1,
-  "avgrating" : 4.6
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    var examples = [{
+      "statistics" : [ {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+      }, {
+        "unfinishedreads" : 450,
+        "nreads" : 2456,
+        "lastmonthrating" : 4.7,
+        "bookId" : 1,
+        "avgrating" : 4.6
+    }]
+  },{
+      "statistics" : [ {
+        "unfinishedreads" : 542,
+        "nreads" : 2451,
+        "lastmonthrating" : 4.3,
+        "bookId" : 1,
+        "avgrating" : 4.4
+      }, {
+        "unfinishedreads" : 324,
+        "nreads" : 1873,
+        "lastmonthrating" : 4.8,
+        "bookId" : 2,
+        "avgrating" : 4.6
+      }]
+  },{
+    "statistics" : [ {
+      "unfinishedreads" : 2314,
+      "nreads" : 6789,
+      "lastmonthrating" : 4.7,
+      "bookId" : 1,
+      "avgrating" : 4.6
+    }]
+  }];
+    if (authorId < 4) {
+      resolve([JSON.stringify("ESTADÍSTICAS DE LECTURA DE LIBROS DEL AUTOR " + authorId + "\n"), examples[authorId-1]]);
     } else {
-      resolve();
+      reject(JSON.stringify("No existe autor con ID "+ authorId));
     }
   });
 }
@@ -328,12 +271,10 @@ exports.getBookStatistics = function(bookId) {
  **/
 exports.loginAuthor = function(authorname,password) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if (password.length > 7) {
+      resolve(JSON.stringify("Sesión de autor iniciada: Bienvenid@ " + authorname));
     } else {
-      resolve();
+      reject(JSON.stringify("Contraseña incorrecta (PISTA:muy corta...)"));
     }
   });
 }
@@ -346,7 +287,7 @@ exports.loginAuthor = function(authorname,password) {
  **/
 exports.logoutAuthor = function() {
   return new Promise(function(resolve, reject) {
-    resolve();
+    resolve(JSON.stringify("La sesión se ha cerrado"));
   });
 }
 
@@ -359,24 +300,13 @@ exports.logoutAuthor = function() {
  * authorname String author's username that need to be update
  * no response value expected for this operation
  **/
-exports.updateUser = function(body,authorname) {
+exports.updateAuthor = function(body) {
   return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
- * Update author
- * This can only be done by the logged in author.
- *
- * body Author Update an existent author in the store (optional)
- * authorname String author's username that need to be update
- * no response value expected for this operation
- **/
-exports.updateUser = function(body,authorname) {
-  return new Promise(function(resolve, reject) {
-    resolve();
+    if (body.id < 4) {
+      resolve([JSON.stringify("AUTOR " + body.id + " ACTUALIZADO"), body]);
+    } else {
+      reject(JSON.stringify("No hay ningún autor con ese ID"));
+    }
   });
 }
 
